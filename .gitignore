@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -8,6 +9,20 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> docker ###
+/docker-compose.override.yml
+/compose.override.yaml
+/.docker/
+###< docker ###
+
+###> ide ###
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+###< ide ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml

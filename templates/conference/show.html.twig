@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conference Guestbook - {{ conference }}{% endblock %}
+
+{% block body %}
+    <h2>{{ conference }} Conference</h2>
+
+    {% if comments|length > 0 %}
+        <div style="color: #666; margin-bottom: 2rem;">There are {{ comments|length }} comments.</div>
+
+        {% for comment in comments %}
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #fafafa;">
+                {% if comment.photofilename %}
+                    <img src="{{ asset('uploads/photos/' ~ comment.photofilename) }}" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 1rem;" />
+                {% endif %}
+
+                <h4 style="margin-top: 0;">{{ comment.author }}</h4>
+                <small style="display: block; margin-bottom: 1rem;">
+                    {{ comment.createdAt|format_datetime('medium', 'short') }}
+                </small>
+
+                <p style="margin-bottom: 0;">{{ comment.text }}</p>
+            </div>
+        {% endfor %}
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            {% if previous >= 0 %}
+                <a href="{{ path('conference', { slug: conference.slug, offset: previous }) }}" style="padding: 0.5rem 1rem; background-color: #0066cc; color: white; border-radius: 4px; text-decoration: none;">← Previous</a>
+            {% endif %}
+            {% if next < comments|length %}
+                <a href="{{ path('conference', { slug: conference.slug, offset: next }) }}" style="padding: 0.5rem 1rem; background-color: #0066cc; color: white; border-radius: 4px; text-decoration: none;">Next →</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 3rem; color: #666; background-color: #fafafa; border-radius: 8px;">
+            No comments have been posted yet for this conference.
+        </div>
+    {% endif %}
+{% endblock %}

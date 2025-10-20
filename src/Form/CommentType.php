@@ -21,9 +21,6 @@ class CommentType extends AbstractType
             ])
             ->add('text')
             ->add('email', EmailType::class)
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
             ->add('photo', FileType::class, [
                 'required' => false,
                 'mapped' => false,

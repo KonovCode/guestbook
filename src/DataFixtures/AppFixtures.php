@@ -39,10 +39,29 @@ class AppFixtures extends Fixture
         $comment1 = new Comment();
         $comment1->setAuthor('John');
         $comment1->setText('This is a comment');
+        $comment1->setState('published');
         $comment1->setEmail('jhony@gmail.com');
         $comment1->setCreatedAtValue();
         $comment1->setConference($dnepr);
         $manager->persist($comment1);
+
+        $comment2 = new Comment();
+        $comment2->setAuthor('Jane');
+        $comment2->setText('This needs review - potential spam');
+        $comment2->setState('potential_spam');
+        $comment2->setEmail('jane@gmail.com');
+        $comment2->setCreatedAtValue();
+        $comment2->setConference($dnepr);
+        $manager->persist($comment2);
+
+        $comment3 = new Comment();
+        $comment3->setAuthor('Bob');
+        $comment3->setText('Another comment for review - ham');
+        $comment3->setState('ham');
+        $comment3->setEmail('bob@gmail.com');
+        $comment3->setCreatedAtValue();
+        $comment3->setConference($kiev);
+        $manager->persist($comment3);
 
         $manager->flush();
     }
